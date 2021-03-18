@@ -28,18 +28,40 @@ public struct Stats
 public class PlayerStats : MonoBehaviour
 {
 
+    [SerializeField] private PlayerProfession[] playerProfessions;
+
+    private PlayerProfession _profession;
+    public PlayerProfession Profession
+    {
+        get { return _profession; }
+        set {
+
+             _profession = value;
+           Strength.defaultStat     = _profession.Strength;    
+           Dexerity.defaultStat     = _profession.Dexerity;    
+           Constitution.defaultStat = _profession.Constitution;
+           Wisdom.defaultStat       = _profession.Wisdom;      
+           Intelligence.defaultStat = _profession.Intelligence;
+           Charisma.defaultStat     = _profession.Charisma;
+            UpdateStats();
+
+
+        }
+    }
+
+
     public enum BaseStats { Strength, Dexerity, Constitution, Wisdom, Intelligence, Charisma };
 
     public int level;
-    public int pointpool = 5;
+    public int pointpool = 15;
 
     [Header("Stats")]
-    public Stats Strength; // Health = Health Regen
-    public Stats Dexerity; //Movement Speed
+    public Stats Strength;     // Health = Health Regen
+    public Stats Dexerity;     //Movement Speed
     public Stats Constitution; //Stamina = Stamina Regen
-    public Stats Wisdom; //Mana Pool + Mana Regen
+    public Stats Wisdom;       //Mana Pool + Mana Regen
     public Stats Intelligence; //Spell Casting Stats
-    public Stats Charisma; //Personality
+    public Stats Charisma;     //Personality
 
     [Header("Health")]
     public float Maxhealth; // Class Base Healthg + (Strength * level * 0.5f);
@@ -81,7 +103,10 @@ public class PlayerStats : MonoBehaviour
         return new Stats();
     }
 
-
+    private void UpdateStats()
+    {
+        
+    }
     public bool ChangeStats(BaseStats baseStats, int amount)
     {
         Stats stats = EnumToStats(baseStats);
@@ -154,8 +179,39 @@ public class PlayerStats : MonoBehaviour
         return false;
     }
 
+    private void OnGUI()
+    {
+        StatsOnGUI();
+        ProfessionOnGUI();
+    }
 
-private void OnGUI()
+    Vector2 scrollPosition;
+    private void ProfessionOnGUI()
+    {
+        float currentY = Screen.height * 0.6f;
+
+        GUI.Box(new Rect(Screen.width - 170, currentY, 155, 80), "Profession");
+
+        currentY += 20;
+        scrollPosition = GUI.BeginScrollView(new Rect(Screen.width - 170, currentY, 155, 50)
+                            , scrollPosition
+                            , new Rect(0, 0, 100, 30 * playerProfessions.Length));
+
+        currentY = 0;
+
+        foreach (PlayerProfession profession in playerProfessions)
+        {
+            if(GUI.Button(new Rect(20, currentY, 100,20), profession.ProfessionName))
+            {
+                Profession = profession;
+            }
+            currentY += 30;
+        }
+    }
+
+   
+
+private void StatsOnGUI()
 {
     float currentY = 40;
     GUI.Box(new Rect(Screen.width - 170, 10, 155, 210), "Stats : " + pointpool);
