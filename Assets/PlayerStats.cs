@@ -34,15 +34,16 @@ public class PlayerStats : MonoBehaviour
     public PlayerProfession Profession
     {
         get { return _profession; }
-        set {
+        set
+        {
 
-             _profession = value;
-           Strength.defaultStat     = _profession.Strength;    
-           Dexerity.defaultStat     = _profession.Dexerity;    
-           Constitution.defaultStat = _profession.Constitution;
-           Wisdom.defaultStat       = _profession.Wisdom;      
-           Intelligence.defaultStat = _profession.Intelligence;
-           Charisma.defaultStat     = _profession.Charisma;
+            _profession = value;
+            Strength.defaultStat = _profession.Strength;
+            Dexerity.defaultStat = _profession.Dexerity;
+            Constitution.defaultStat = _profession.Constitution;
+            Wisdom.defaultStat = _profession.Wisdom;
+            Intelligence.defaultStat = _profession.Intelligence;
+            Charisma.defaultStat = _profession.Charisma;
             UpdateStats();
 
 
@@ -105,7 +106,7 @@ public class PlayerStats : MonoBehaviour
 
     private void UpdateStats()
     {
-        
+
     }
     public bool ChangeStats(BaseStats baseStats, int amount)
     {
@@ -201,40 +202,48 @@ public class PlayerStats : MonoBehaviour
 
         foreach (PlayerProfession profession in playerProfessions)
         {
-            if(GUI.Button(new Rect(20, currentY, 100,20), profession.ProfessionName))
+            if (GUI.Button(new Rect(20, currentY, 100, 20), profession.ProfessionName))
             {
                 Profession = profession;
             }
             currentY += 30;
         }
+
+
+        GUI.EndScrollView();
+
+        if (_profession != null)
+        {
+            GUI.Box(new Rect(Screen.width - 170, Screen.height - 110, 155, 80), "Profession");
+            GUI.Label(new Rect(Screen.width - 140, Screen.height -  120 + 30, 100, 20), _profession.ProfessionName);
+            GUI.Label(new Rect(Screen.width - 140, Screen.height - 120 + 45, 100, 20), _profession.AbilityName);
+            GUI.Label(new Rect(Screen.width - 140, Screen.height - 120 + 60, 100, 20), _profession.AbilityDescription);
+        }
     }
-
-   
-
 private void StatsOnGUI()
-{
-    float currentY = 40;
-    GUI.Box(new Rect(Screen.width - 170, 10, 155, 210), "Stats : " + pointpool);
-
-    foreach (BaseStats baseStats in Enum.GetValues(typeof(BaseStats)))
     {
-        Stats stats = EnumToStats(baseStats);
+        float currentY = 40;
+        GUI.Box(new Rect(Screen.width - 170, 10, 155, 210), "Stats : " + pointpool);
 
-        if (GUI.Button(new Rect(Screen.width - 165, currentY, 20, 20), "-"))
+        foreach (BaseStats baseStats in Enum.GetValues(typeof(BaseStats)))
         {
-            ChangeStats(baseStats, -1);
+            Stats stats = EnumToStats(baseStats);
+
+            if (GUI.Button(new Rect(Screen.width - 165, currentY, 20, 20), "-"))
+            {
+                ChangeStats(baseStats, -1);
+            }
+            GUI.Label(new Rect(Screen.width - 140, currentY, 100, 20), baseStats.ToString() + " :" + (stats.defaultStat + stats.pooledStat));
+            if (GUI.Button(new Rect(Screen.width - 40, currentY, 20, 20), "+"))
+            {
+                ChangeStats(baseStats, 1);
+            }
+            currentY += 30;
         }
-        GUI.Label(new Rect(Screen.width - 140, currentY, 100, 20), baseStats.ToString() + " :" + (stats.defaultStat + stats.pooledStat));
-        if (GUI.Button(new Rect(Screen.width - 40, currentY, 20, 20), "+"))
-        {
-            ChangeStats(baseStats, 1);
-        }
-        currentY += 30;
+
+
+
+
     }
-
-
-
-
-}
 
 }

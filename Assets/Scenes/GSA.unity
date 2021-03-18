@@ -152,16 +152,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4931967e7c18af40b29ab6fa599970f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerProfessions:
+  - ProfessionName: Warrior
+    AbilityName: Hammer Throw
+    AbilityDescription: Throws pocket Hammer doing Massive damage
+    Strength: 15
+    Dexerity: 9
+    Constitution: 15
+    Wisdom: 5
+    Intelligence: 7
+    Charisma: 9
+  - ProfessionName: Ranger
+    AbilityName: 
+    AbilityDescription: 
+    Strength: 0
+    Dexerity: 0
+    Constitution: 0
+    Wisdom: 0
+    Intelligence: 0
+    Charisma: 0
+  - ProfessionName: Mage
+    AbilityName: Magic Teleport
+    AbilityDescription: Dashes While doing Overtime Damage
+    Strength: 6
+    Dexerity: 14
+    Constitution: 7
+    Wisdom: 13
+    Intelligence: 14
+    Charisma: 6
+  - ProfessionName: Medic
+    AbilityName: Regen Boost
+    AbilityDescription: Boost All Regen Speed
+    Strength: 8
+    Dexerity: 11
+    Constitution: 13
+    Wisdom: 10
+    Intelligence: 9
+    Charisma: 6
+  - ProfessionName: Support
+    AbilityName: 
+    AbilityDescription: 
+    Strength: 0
+    Dexerity: 0
+    Constitution: 0
+    Wisdom: 0
+    Intelligence: 0
+    Charisma: 0
   level: 1
-  pointpool: 5
+  pointpool: 15
   Strength:
     defaultStat: 10
     pooledStat: 0
-  Dexerity: 10
-  Constitution: 10
-  Wisdom: 10
-  Intelligence: 10
-  Charisma: 10
+  Dexerity:
+    defaultStat: 10
+    pooledStat: 0
+  Constitution:
+    defaultStat: 10
+    pooledStat: 0
+  Wisdom:
+    defaultStat: 10
+    pooledStat: 0
+  Intelligence:
+    defaultStat: 10
+    pooledStat: 0
+  Charisma:
+    defaultStat: 10
+    pooledStat: 0
   Maxhealth: 0
   currentHealth: 0
   healthRegen: 0
